@@ -1,17 +1,16 @@
 drop table if exists BOOK_WAREHOUSE;
 drop table if exists tableORDER;
 drop table if exists DISTRIBUTER;
-drop table if exists BOOK;
 drop table if exists AUTHOR;
 drop table if exists EMPLOYEE;
 drop table if exists REVIEW;
 drop table if exists BOOK_AUTHOR;
 drop table if exists BOOK_DISTRIBUTER;
 drop table if exists BOOK_ORDER;
-drop table if exists PUBLISHER;
 drop table if exists WAREHOUSE;
 drop table if exists CUSTOMER;
-
+drop table if exists BOOK;
+drop table if exists PUBLISHER;
 
 create table CUSTOMER(
 	CustomerID integer primary key,
@@ -81,7 +80,7 @@ create table EMPLOYEE(
 create table REVIEW(
 	Rating integer,
 	Comments Text,
-	ReviewID integer primary key,
+	ReviewID integer primary key autoincrement,
 	CustomerID integer not null,
 	BookID integer not null,
 	FOREIGN KEY(CustomerID) references CUSTOMER(CustomerID),
