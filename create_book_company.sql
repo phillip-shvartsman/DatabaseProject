@@ -13,7 +13,7 @@ drop table if exists BOOK;
 drop table if exists PUBLISHER;
 
 create table CUSTOMER(
-	CustomerID integer primary key,
+	CustomerID integer primary key autoincrement,
 	LastN Text not null,
 	FirstN Text not null,
 	Billing_Addr Text,
@@ -44,11 +44,10 @@ create table AUTHOR(
 	Biography Text,
 	AuthID PRIMARY KEY
 );
-create table tableORDER(
+create table ORDERS(
 	CustomerID integer not null,
 	Status Text not null,
 	OrderID Integer Primary Key autoincrement,
-	Price Decimal(3,2),
 	Timestamp Text,
 	Dest_City Text,
 	Dest_State Text,
@@ -63,7 +62,7 @@ create table DISTRIBUTER(
 	Distro_State Text
 );
 create table WAREHOUSE(
-	WarehouseID primary key,
+	WarehouseID integer primary key autoincrement,
 	W_Addr Text,
 	W_City Text,
 	W_State Text
