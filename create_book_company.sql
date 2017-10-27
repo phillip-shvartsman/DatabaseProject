@@ -33,7 +33,6 @@ create table BOOK(
 	Price DECIMAL(3,2),
 	Category Text,
 	Blurb Text,
-	Stock integer,
 	Year integer,
 	PubName Text not null,
 	FOREIGN KEY(PubName) references PUBLISHER(Name)
@@ -94,6 +93,7 @@ create table BOOK_AUTHOR(
 create table BOOK_WAREHOUSE(
 	WarehouseID integer,
 	ISBN Text,
+	Stock integer,
 	PRIMARY KEY(WarehouseID,ISBN)
 );
 create table BOOK_DISTRIBUTER(
