@@ -47,12 +47,12 @@ create table AUTHOR(
 create table ORDERS(
 	CustomerID integer not null,
 	Status Text not null,
-	OrderID Integer Primary Key autoincrement,
+	OrderID integer Primary Key autoincrement,
 	Timestamp Text,
 	Dest_City Text,
 	Dest_State Text,
 	Dest_Addr Text,
-	Number_Of_Items Integer not null,
+	Number_Of_Items integer not null,
 	FOREIGN KEY(CustomerID) references Customer(CustomerID)
 );
 create table DISTRIBUTER(
@@ -103,5 +103,9 @@ create table BOOK_DISTRIBUTER(
 );
 create table BOOK_ORDER(
 	OrderID integer,
-	ISBN Text
+	ISBN Text,
+    NumberOfItems integer,
+    primary key(OrderID, ISBN),
+    foreign key(OrderID) references tableOrder(OrderID),
+    foreign key(ISBN) references Book(ISBN)
 );
