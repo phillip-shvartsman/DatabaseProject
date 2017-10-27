@@ -18,7 +18,8 @@ create table CUSTOMER(
 	FirstN Text not null,
 	Billing_Addr Text,
 	Billing_City Text,
-	Billing_State Text
+	Billing_State Text,
+	Email Text
 );
 create table PUBLISHER(
 	Name Text primary key,

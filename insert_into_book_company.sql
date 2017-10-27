@@ -25,15 +25,15 @@ values
 --(SELECT ABS((RANDOM() %(999999999-100000000))+100000000))
 
 --Pre-Defined Customers
-insert into CUSTOMER(FirstN,LastN)
+insert into CUSTOMER(FirstN, LastN, Email)
 values
-('Joe','Peters'),('Russel','Peters'),('Gary','Oldman'),
-('Steve','Bushemi'),('Squidward','Tortellini!'),('Ponald','Drumph'),
-('Michael','Scott'),('Jim','Halpert'),('Steve','Carrell'),('Ben','Ras'),
-('Niel','Breshoff'),('Joe','Shmo'),('Gary','Newman'),('Newman',''),
-('Michael','Bluth'),('Henry','Kissfinger'),
-('Ronald','Reagan'),('Squirrel','Boy'),('Steve','Nash'),
-('Jim','Jong'),('Chandler','Bing');
+('Joe', 'Peters', 'joe@peters.com'),('Russel','Peters', 'russel@peters.com'),('Gary','Oldman', 'thatoldguy@gmail.com'),
+('Steve','Bushemi', 'crazyeyejoe@hollywood.com'),('Squidward','Tortellini!', 'sqtort@thebikinibottom.org'),('Ponald','Drumph', 'prez@dehwhitehouse.govh'),
+('Michael','Scott', 'stevecarrell@hollywood.com'),('Jim','Halpert', NULL),('Steve','Carrell', 'mikescott@scranton.net'),('Ben','Ras', 'who@who.com'),
+('Niel','Breshoff', NULL),('Joe','Shmo', 'anonymous@yahoo.com'),('Gary','Newman', 'newtogary@hotmail.com'),('Newman','', 'whonewman@hotmail.com'),
+('Michael','Bluth', 'whoisdis@bluth.com'),('Henry','Kissfinger', 'henry@whitehouse.gov'),
+('Ronald','Reagan', 'teardownthiswall@gorbachev.com'),('Squirrel','Boy', 'crazyfor@nuts.com'),('Steve','Nash', 'droppindimes@nba.com'),
+('Jim','Jong', 'jj@seoul.com'),('Chandler','Bing', 'bingo@friends.com');
 
 --Pre-Defined Distributers
 insert into DISTRIBUTER(Name)
