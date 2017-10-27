@@ -1,5 +1,5 @@
 drop table if exists BOOK_WAREHOUSE;
-drop table if exists tableORDER;
+drop table if exists ORDERS;
 drop table if exists DISTRIBUTER;
 drop table if exists AUTHOR;
 drop table if exists EMPLOYEE;
@@ -8,9 +8,9 @@ drop table if exists BOOK_AUTHOR;
 drop table if exists BOOK_DISTRIBUTER;
 drop table if exists BOOK_ORDER;
 drop table if exists WAREHOUSE;
-drop table if exists CUSTOMER;
 drop table if exists BOOK;
 drop table if exists PUBLISHER;
+drop table if exists CUSTOMER;
 
 create table CUSTOMER(
 	CustomerID integer primary key autoincrement,
@@ -33,6 +33,7 @@ create table BOOK(
 	Price DECIMAL(3,2),
 	Category Text,
 	Blurb Text,
+	Stock integer,
 	Year integer,
 	PubName Text not null,
 	FOREIGN KEY(PubName) references PUBLISHER(Name)
