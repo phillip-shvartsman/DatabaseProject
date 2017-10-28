@@ -25,15 +25,38 @@ values
 --(SELECT ABS((RANDOM() %(999999999-100000000))+100000000))
 
 --Pre-Defined Customers
-insert into CUSTOMER(FirstN, LastN, Email)
+insert into CUSTOMER(CustomerID, FirstN, LastN, Email)
 values
-('Joe', 'Peters', 'joe@peters.com'),('Russel','Peters', 'russel@peters.com'),('Gary','Oldman', 'thatoldguy@gmail.com'),
-('Steve','Bushemi', 'crazyeyejoe@hollywood.com'),('Squidward','Tortellini!', 'sqtort@thebikinibottom.org'),('Ponald','Drumph', 'prez@dehwhitehouse.govh'),
-('Michael','Scott', 'stevecarrell@hollywood.com'),('Jim','Halpert', NULL),('Steve','Carrell', 'mikescott@scranton.net'),('Ben','Ras', 'who@who.com'),
-('Niel','Breshoff', NULL),('Joe','Shmo', 'anonymous@yahoo.com'),('Gary','Newman', 'newtogary@hotmail.com'),('Newman','', 'whonewman@hotmail.com'),
-('Michael','Bluth', 'whoisdis@bluth.com'),('Henry','Kissfinger', 'henry@whitehouse.gov'),
-('Ronald','Reagan', 'teardownthiswall@gorbachev.com'),('Squirrel','Boy', 'crazyfor@nuts.com'),('Steve','Nash', 'droppindimes@nba.com'),
-('Jim','Jong', 'jj@seoul.com'),('Chandler','Bing', 'bingo@friends.com');
+(1, 'Joe', 'Peters', 'joe@peters.com'),(2, 'Russel','Peters', 'russel@peters.com'),(3, 'Gary','Oldman', 'thatoldguy@gmail.com'),
+(4, 'Steve','Bushemi', 'crazyeyejoe@hollywood.com'),(5, 'Squidward','Tortellini!', 'sqtort@thebikinibottom.org'),(6, 'Ponald','Drumph', 'prez@dehwhitehouse.govh'),
+(7, 'Michael','Scott', 'stevecarrell@hollywood.com'),(8, 'Jim','Halpert', NULL),(9, 'Steve','Carrell', 'mikescott@scranton.net'),(10, 'Ben','Ras', 'who@who.com'),
+(11, 'Niel','Breshoff', NULL),(12, 'Joe','Shmo', 'anonymous@yahoo.com'),(13, 'Gary','Newman', 'newtogary@hotmail.com'),(14, 'Newman','', 'whonewman@hotmail.com'),
+(15, 'Michael','Bluth', 'whoisdis@bluth.com'),(16, 'Henry','Kissfinger', 'henry@whitehouse.gov'),
+(17, 'Ronald','Reagan', 'teardownthiswall@gorbachev.com'),(18, 'Squirrel','Boy', 'crazyfor@nuts.com'),(19, 'Steve','Nash', 'droppindimes@nba.com'),
+(20, 'Jim','Jong', 'jj@seoul.com'),(21, 'Chandler','Bing', 'bingo@friends.com');
+
+insert into ADDRESS(CustomerID, Street, City, State)
+values
+(1, '211 E Northwood Ave', 'Columbus', 'Ohio'),
+(1, '56 Frambes', 'Columbus', 'Ohio'),
+(1, '1600 Wall Street', 'New York City', 'New York'),
+(2, '89 Ravenna Road', 'Twinsburg', 'Ohio'),
+(2, '10039 Serene Court', 'Twinsburg', 'Ohio'),
+(4, '1467 Park Ridge', 'Hudson', 'Ohio'),
+(5, '58 W Lafayette Street', 'San Francisco', 'California'),
+(7, '4567 Madeup Street', 'Oklahoma City', 'Oklahoma'),
+(9, '23 College Road', 'Columbus', 'Ohio'),
+(9, '2520 Old Mill Road', 'Twinsburg Township', 'Ohio'),
+(9, '10039 Serene Court', 'Twinsburg', 'Ohio'),
+(10, '12 Im running out of ideas lane', 'Seattle', 'Washington'),
+(11, '45 Woody Hayes Drive', 'Columbus', 'Ohio'),
+(11, '181 18th Avenue', 'Columbus', 'Ohio'),
+(11, '63 W Oakland Avenue', 'Columbus', 'Ohio'),
+(13, '284 Paradise Drive', 'Honolulu', 'Hawaii'),
+(13, '456 Belfair Dr', 'Anchorage', 'Alaska'),
+(17, '7896 Chamberlin Road', 'Jacksonville', 'Florida'),
+(19, '34 Euclid Ave', 'Cleveland', 'Ohio'),
+(20, '7 Houston Ave', 'New York City', 'New York');
 
 --Pre-Defined Distributers
 insert into DISTRIBUTER(Name)
@@ -78,28 +101,28 @@ insert into BOOK_DISTRIBUTER(Name,ISBN)
 	limit 30;
 
 --Each customer gets two pre-defined order
-insert into ORDERS(CustomerID,STATUS,Number_Of_Items)
+insert into ORDERS(CustomerID,STATUS,Number_Of_Items, Timestamp)
 values
-(1,'Shipped',2),
-(2,'Shipped',2),
-(3,'Shipped',2),
-(4,'Shipped',2),
-(5,'Shipped',2),
-(6,'Shipped',2),
-(7,'Shipped',2),
-(8,'Shipped',2),
-(9,'Shipped',2),
-(10,'Shipped',2),
-(11,'Shipped',2),
-(12,'Shipped',2),
-(13,'Shipped',2),
-(14,'Shipped',2),
-(15,'Shipped',2),
-(16,'Shipped',2),
-(17,'Shipped',2),
-(18,'Shipped',2),
-(19,'Shipped',2),
-(20,'Shipped',2);
+(1,'Shipped',2, '10-05-2017 03:04:05'),
+(2,'Shipped',2, '11-05-2016 12:11:34'),
+(3,'Shipped',2, '05-23-2013 02:34:56'),
+(4,'Shipped',2, '09-15-2014 13:56:57'),
+(5,'Shipped',2, '07-08-2015 13:45:51'),
+(6,'Shipped',2, '04-16-2000 23:46:56'),
+(7,'Shipped',2, '03-15-2003 20:40:56'),
+(8,'Shipped',2, '02-27-2005 07:08:34'),
+(9,'Shipped',2, '04-26-2007 13:24:34'),
+(10,'Shipped',2, '12-24-2017 23:23:23'),
+(11,'Shipped',2, '01-01-2017 20:34:12'),
+(12,'Shipped',2, '03-07-2016 20:34:12'),
+(13,'Shipped',2, '05-28-2017 23:56:03'),
+(14,'Shipped',2, '07-23-2017 23:45:34'),
+(15,'Shipped',2, '05-05-2005 05:05:05'),
+(16,'Shipped',2, '03-03-2003 03:03:03'),
+(17,'Shipped',2, '04-04-2014 20:05:00'),
+(18,'Shipped',2, '06-06-2017 03:34:00'),
+(19,'Shipped',2, '07-07-2008 15:04:00'),
+(20,'Shipped',2, '05-25-2015 17:23:00');
 
 --Get a random warehouse and pair it with a random ISBN
 insert into BOOK_WAREHOUSE(WarehouseID,ISBN)
@@ -181,7 +204,7 @@ values
 ('Other');
 
 
-insert into BOOK_CATEGORY(ISBN, Category)
+insert into BOOK_CATEGORY(ISBN, CategoryName)
 values
 ('0385727179X', 'Romance'),
 ('130323519', 'Fantasy'),

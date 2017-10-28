@@ -13,15 +13,22 @@ drop table if exists PUBLISHER;
 drop table if exists CUSTOMER;
 drop table if exists BOOK_CATEGORY;
 drop table if exists CATEGORY;
+drop table if exists ADDRESS;
+
+create table ADDRESS (
+    CustomerID Integer,
+    Street Text,
+    City Text,
+    State Text,
+    foreign key(CustomerID) references CUSTOMER(CustomerID)
+);
 
 create table CUSTOMER (
-	CustomerID Integer primary key autoincrement,
+	CustomerID Integer,
 	LastN Text not null,
 	FirstN Text not null,
-	Billing_Addr Text,
-	Billing_City Text,
-	Billing_State Text,
-	Email Text
+	Email Text,
+    primary key(CustomerID)
 );
 
 create table PUBLISHER (
