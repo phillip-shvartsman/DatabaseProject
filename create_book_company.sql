@@ -7,18 +7,29 @@ drop table if exists REVIEW;
 drop table if exists BOOK_AUTHOR;
 drop table if exists BOOK_DISTRIBUTER;
 drop table if exists BOOK_ORDER;
-drop table if exists WAREHOUSE;
 drop table if exists BOOK;
 drop table if exists PUBLISHER;
 drop table if exists CUSTOMER;
+drop table if exists EMPLOYEEJOBS;
+drop table if exists WAREHOUSE;
+drop table if exists ADDRESS;
 
+create table EMPLOYEEJOBS(
+	Title Text primary key,
+	WarehouseID Integer,
+	Salary Integer,
+	foreign key(WarehouseID) references Warehouse(WarehouseID)
+);
 create table CUSTOMER(
 	CustomerID integer primary key autoincrement,
 	LastN Text not null,
-	FirstN Text not null,
-	Billing_Addr Text,
-	Billing_City Text,
-	Billing_State Text
+	FirstN Text not null
+);
+create table ADDRESS(
+	CustomerID integer primary key,
+	Street string,
+	City string,
+	State string
 );
 create table PUBLISHER(
 	Name Text primary key,
@@ -72,9 +83,9 @@ create table EMPLOYEE(
 	Title Text,
 	LastN Text not null,
 	FirstN Text not null,
-	Salary Integer,
-	WarehouseID Integer,
-	FOREIGN KEY(WarehouseID) references WAREHOUSE(WarehouseID)
+	WarehouseID integer,
+	FOREIGN KEY(WarehouseID) references WAREHOUSE(WarehouseID),
+	FOREIGN KEY(Title) references EMPLOYEEJOBS(Title)
 );
 create table REVIEW(
 	Rating integer,
