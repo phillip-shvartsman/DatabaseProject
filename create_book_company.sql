@@ -10,7 +10,6 @@ drop table if exists BOOK_ORDER;
 drop table if exists BOOK;
 drop table if exists PUBLISHER;
 drop table if exists CUSTOMER;
-<<<<<<< HEAD
 drop table if exists EMPLOYEEJOBS;
 drop table if exists WAREHOUSE;
 drop table if exists ADDRESS;
@@ -31,143 +30,111 @@ create table ADDRESS(
 	Street string,
 	City string,
 	State string
-=======
-drop table if exists BOOK_CATEGORY;
-drop table if exists CATEGORY;
-drop table if exists ADDRESS;
-
-create table ADDRESS (
-    CustomerID Integer,
-    Street Text,
-    City Text,
-    State Text,
-    foreign key(CustomerID) references CUSTOMER(CustomerID)
 );
-
-create table CUSTOMER (
-	CustomerID Integer,
-	LastN Text not null,
-	FirstN Text not null,
-	Email Text,
-    primary key(CustomerID)
->>>>>>> e6784cce4de44e19b8035ed976f1db113c399eff
-);
-
-create table PUBLISHER (
+create table PUBLISHER(
 	Name Text primary key,
 	Pub_Addr Text,
 	Pub_City Text,
 	Pub_state Text
 );
-
-create table BOOK (
-	ISBN Text primary key,
-	Title Text not null,
+create table BOOK(
+	Title TEXT NOT NULL,
+	ISBN Text PRIMARY KEY,
+	Language TEXT,
+	Price DECIMAL(3,2),
 	Category Text,
-	Language Text,
-	Price Decimal(3,2),
 	Blurb Text,
-	Year Integer,
+	Year integer,
 	PubName Text not null,
-	foreign key(PubName) references PUBLISHER(Name)
+	FOREIGN KEY(PubName) references PUBLISHER(Name)
 );
-
-create table AUTHOR (
-	FirstN Text not null,
+create table AUTHOR(
+	FirstN Text NOT null,
 	MiddleN Text,
 	LastN Text not null,
 	Biography Text,
-	AuthID primary key
+	AuthID PRIMARY KEY
 );
-
-create table ORDERS (
-	CustomerID Integer not null,
+create table ORDERS(
+	CustomerID integer not null,
 	Status Text not null,
-	OrderID Integer primary key autoincrement,
+	OrderID Integer Primary Key autoincrement,
 	Timestamp Text,
 	Dest_City Text,
 	Dest_State Text,
 	Dest_Addr Text,
 	Number_Of_Items Integer not null,
-	foreign key(CustomerID) references CUSTOMER(CustomerID)
+	FOREIGN KEY(CustomerID) references Customer(CustomerID)
 );
-
-create table DISTRIBUTER (
+create table DISTRIBUTER(
 	Name Text primary key,
 	Distro_Addr Text,
 	Distro_City Text,
 	Distro_State Text
 );
-
-create table WAREHOUSE (
-	WarehouseID Integer primary key autoincrement,
+create table WAREHOUSE(
+	WarehouseID integer primary key autoincrement,
 	W_Addr Text,
 	W_City Text,
 	W_State Text
 );
-
 create table EMPLOYEE(
-	SSN Integer primary key,
+	SSN integer primary key,
 	Title Text,
 	LastN Text not null,
 	FirstN Text not null,
-<<<<<<< HEAD
 	WarehouseID integer,
 	FOREIGN KEY(WarehouseID) references WAREHOUSE(WarehouseID),
 	FOREIGN KEY(Title) references EMPLOYEEJOBS(Title)
-=======
-	Salary Integer,
-	WarehouseID Integer,
-	foreign key(WarehouseID) references WAREHOUSE(WarehouseID)
->>>>>>> e6784cce4de44e19b8035ed976f1db113c399eff
 );
-
 create table REVIEW(
-	Rating Integer,
+	Rating integer,
 	Comments Text,
-	ReviewID Integer primary key autoincrement,
-	CustomerID Integer not null,
-	BookID Integer not null,
-	foreign key(CustomerID) references CUSTOMER(CustomerID),
-	foreign key(BookID) references BOOK(ISBN)
+	ReviewID integer primary key autoincrement,
+	CustomerID integer not null,
+	BookID integer not null,
+	FOREIGN KEY(CustomerID) references CUSTOMER(CustomerID),
+	FOREIGN KEY(BookID) references BOOK(ISBN)
 );
-
-create table Category (
-    Name Text primary key
-);
-
-create table BOOK_AUTHOR (
-	AuthID Integer,
+create table BOOK_AUTHOR(
+	AuthID integer,
 	ISBN Text,
-	primary key(AuthID, ISBN)
+	PRIMARY KEY(AuthID,ISBN)
 );
-
-create table BOOK_WAREHOUSE (
-	WarehouseID Integer,
+create table BOOK_WAREHOUSE(
+	WarehouseID integer,
 	ISBN Text,
-	Stock Integer,
-	primary key(WarehouseID,ISBN)
+	Stock integer,
+	PRIMARY KEY(WarehouseID,ISBN)
 );
-
-create table BOOK_DISTRIBUTER (
+create table BOOK_DISTRIBUTER(
 	Name Text,
 	ISBN Text,
-	primary key(Name, ISBN)
+	PRIMARY KEY(Name,ISBN)
+);
+create table BOOK_ORDER(
+	OrderID integer,
+	ISBN Text
 );
 
-create table BOOK_ORDER (
-	OrderID Integer,
-	ISBN Text,
-    NumberOfItems Integer,
-    primary key(OrderID, ISBN),
-    foreign key(OrderID) references Orders(OrderID),
-    foreign key(ISBN) references BOOK(ISBN)
-);
+create index indexOrderNoI
+on Orders(Number_of_Items);
+create index indexOrderStatus
+on Orders(Status);
+create index indexOrderTimestamp
+on Orders(Timestamp);
 
-create table BOOK_CATEGORY (
-	ISBN Integer not null,
-	CategoryName Text not null,
-	primary key(ISBN, CategoryName),
-	foreign key(ISBN) references BOOK(ISBN),
-	foreign key(CategoryName) references CATEGORY(Name)
-);
+create index indexBookPrice
+on Book(Price);
+create index indexBookTitle
+on Book(Title);
+create index indexBookCategory
+on Book(Category);
+
+create index indexReviewBookID
+on Review(BookID);
+create index indexReviewCustomerID
+on Review(CustomerID);
+
+create index indexBookOrder
+on BOOK_Order(OrderID,ISBN);
