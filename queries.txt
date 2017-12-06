@@ -10,9 +10,10 @@ where ba.AuthID = a.AuthID and
 
 -- This corresponds to Checkpoint 3, problem 2, part b
 -- 2.B.B
+-- Note that 1, should be the place of the given customer id
 select b.Title, o.Timestamp
 from Orders o, Book_Order bo, Book b
-where G_CustomerID = o.CustomerID and
+where 1 = o.CustomerID and
       o.OrderID = bo.OrderID and
       bo.ISBN = b.ISBN;
 
@@ -20,10 +21,10 @@ where G_CustomerID = o.CustomerID and
 -- This corresponds to Checkpoint 3, problem 2, part c
 -- 2.B.C
 select b.ISBN, Title
-from Book b, (select bw.ISBN, SUM(Quantity) as Sum_quantity
+from Book b, (select bw.ISBN, SUM(Stock) as Sum_quantity
             from Book_Warehouse bw
             group by bw.ISBN
-            Having SUM(Quantity) < 5) s
+            Having SUM(Stock) < 5) s
 where b.ISBN = s.ISBN;
 
 
@@ -41,9 +42,10 @@ where a.LastN = 'Pratchett' and
 
 -- This corresponds to Checkpoint 3, problem 2, part e
 -- 2.B.E
+-- Note that 1 is the place of the given customer id
 select SUM(o.Number_Of_Items)
 from Orders o
-where o.CustomerID = cust_id;
+where o.CustomerID = 1;
 
 
 -- This corresponds to Checkpoint 3, problem 2, part f
@@ -61,11 +63,11 @@ where Sum_NumberOfItems = (select MAX(Sum_NumberOfItems) as max
 
 -- This corresponds to Checkpoint 3, problem 3, part a
 -- 2.B.G
-select LastN, FirstN, max(Rating) MaxR
+select LastN, FirstN, max(r.Rating) MaxR
 from REVIEW r, CUSTOMER c
 where r.CustomerID = c.CustomerID and
-      c.FirstN='Evan' and
-      c.LastN='Adamic';
+      c.FirstN = 'Evan' and
+      c.LastN = 'Adamic';
 
 
 -- This corresponds to Checkpoint 3, problem 3, part b
@@ -91,7 +93,7 @@ group by o.OrderID;
 -- 2.B.J
 select FN, LN, sum(LineItemCost)
 from (select c.CustomerID as ID, c.FirstN as FN, c.LastN as LN,
-             bo.NumberOfItems * b.Price as LineItemCost
+             bo.Number_Of_Items * b.Price as LineItemCost
       from Customer c, Orders o, Book_Order bo, Book b
       where c.CustomerID = o.CustomerID and
           o.OrderID = bo.OrderID and
@@ -103,13 +105,13 @@ group by ID, FN, LN;
 -- 2.B.K
 select FirstN, LastN, Email
 from (select CustomerID, FirstN, LastN, Email, sum(LineItemCost) as ItemSum
-      from (select c.*, bo.NumberOfItems * b.Price as LineItemCost
+      from (select c.*, bo.Number_Of_Items * b.Price as LineItemCost
             from Customer c, Orders o, Book_Order bo, Book b
             where c.CustomerID = o.CustomerID and o.OrderID = bo.OrderID and bo.ISBN = b.ISBN)
             group by CustomerID)
       where ItemSum < (select avg(ItemSum)
                  from (select CustomerID, sum(LineItemCost) as ItemSum
-                       from (select c.CustomerID, bo.NumberOfItems * b.Price as LineItemCost
+                       from (select c.CustomerID, bo.Number_Of_Items * b.Price as LineItemCost
                              from Customer c, Orders o, Book_Order bo, Book b
                              where c.CustomerID = o.CustomerID and
                                    o.OrderID = bo.OrderID and
@@ -119,17 +121,17 @@ from (select CustomerID, FirstN, LastN, Email, sum(LineItemCost) as ItemSum
 
 -- This correponds to Checkpoint 3, problem 4, part c
 -- 2.B.L
-select b.Title, sum(bo.NumberOfItems) AS NumberOfCopies
-from Order o, Book_Order bo, Book b
+select b.Title, sum(bo.Number_Of_Items) AS Number_Of_Copies
+from Orders o, Book_Order bo, Book b
 where o.OrderID = bo.OrderID and bo.ISBN = b.ISBN
 group by b.ISBN, b.Title
-order by NumberOfCopies DESC;
+order by Number_Of_Copies DESC;
 
 
 -- This correponds to Checkpoint 3, problem 4, part d
 -- 2.B.M
-select b.Title, sum(bo.NumberOfItems * b.Price) AS NetAmount
-from Order o, Book_Order bo, Book b
+select b.Title, sum(bo.Number_Of_Items * b.Price) AS NetAmount
+from Orders o, Book_Order bo, Book b
 where o.OrderID = bo.OrderID and bo.ISBN = b.ISBN
 group by b.ISBN, b.Title
 order by NetAmount DESC;
@@ -137,9 +139,9 @@ order by NetAmount DESC;
 
 -- This correponds to Checkpoint 3, problem 4, part e
 -- 2.B.N
-select a.LastN, a.FirstN, sum(d.NumberOfItem) total_sell
+select a.LastN, a.FirstN, sum(d.Number_Of_Items) total_sell
 from Author a, book b, book_author c, Orders d, book_order e
-where a.AuthID= c.AuthID and
+where a.AuthID = c.AuthID and
       b.ISBN = c.ISBN and
       d.OrderID = e.OrderID and
       b.ISBN = e.ISBN

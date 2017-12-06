@@ -100,28 +100,28 @@ insert into BOOK_DISTRIBUTER(Name,ISBN)
 	limit 30;
 
 --Each customer gets two pre-defined order
-insert into ORDERS(CustomerID,STATUS,Number_Of_Items)
+insert into ORDERS(CustomerID,STATUS,Number_Of_Items, Timestamp)
 values
-(1,'Shipped',2),
-(2,'Shipped',2),
-(3,'Shipped',2),
-(4,'Shipped',2),
-(5,'Shipped',2),
-(6,'Shipped',2),
-(7,'Shipped',2),
-(8,'Shipped',2),
-(9,'Shipped',2),
-(10,'Shipped',2),
-(11,'Shipped',2),
-(12,'Shipped',2),
-(13,'Shipped',2),
-(14,'Shipped',2),
-(15,'Shipped',2),
-(16,'Shipped',2),
-(17,'Shipped',2),
-(18,'Shipped',2),
-(19,'Shipped',2),
-(20,'Shipped',2);
+(1,'Shipped',2, '10-05-2017 03:04:05'),
+(2,'Shipped',2, '11-05-2016 12:11:34'),
+(3,'Shipped',2, '05-23-2013 02:34:56'),
+(4,'Shipped',2, '09-15-2014 13:56:57'),
+(5,'Shipped',2, '07-08-2015 13:45:51'),
+(6,'Shipped',2, '04-16-2000 23:46:56'),
+(7,'Shipped',2, '03-15-2003 20:40:56'),
+(8,'Shipped',2, '02-27-2005 07:08:34'),
+(9,'Shipped',2, '04-26-2007 13:24:34'),
+(10,'Shipped',2, '12-24-2017 23:23:23'),
+(11,'Shipped',2, '01-01-2017 20:34:12'),
+(12,'Shipped',2, '03-07-2016 20:34:12'),
+(13,'Shipped',2, '05-28-2017 23:56:03'),
+(14,'Shipped',2, '07-23-2017 23:45:34'),
+(15,'Shipped',2, '05-05-2005 05:05:05'),
+(16,'Shipped',2, '03-03-2003 03:03:03'),
+(17,'Shipped',2, '04-04-2014 20:05:00'),
+(18,'Shipped',2, '06-06-2017 03:34:00'),
+(19,'Shipped',2, '07-07-2008 15:04:00'),
+(20,'Shipped',2, '05-25-2015 17:23:00');
 
 --Get a random warehouse and pair it with a random ISBN
 insert into BOOK_WAREHOUSE(WarehouseID,ISBN)
