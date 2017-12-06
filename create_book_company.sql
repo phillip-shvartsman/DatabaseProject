@@ -23,7 +23,8 @@ create table EMPLOYEEJOBS(
 create table CUSTOMER(
 	CustomerID integer primary key autoincrement,
 	LastN Text not null,
-	FirstN Text not null
+	FirstN Text not null,
+	Email Text
 );
 create table ADDRESS(
 	CustomerID integer primary key,
@@ -114,7 +115,8 @@ create table BOOK_DISTRIBUTER(
 );
 create table BOOK_ORDER(
 	OrderID integer,
-	ISBN Text
+	ISBN Text,
+	Number_Of_Items integer
 );
 
 create index indexOrderNoI
