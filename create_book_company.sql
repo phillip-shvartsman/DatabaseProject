@@ -146,7 +146,7 @@ create view NumAuthorBooks as
   select LastN, FirstN, count(ISBN) as NumUniqueBooks
   from AUTHOR a, BOOK_AUTHOR ba
   where a.AuthID = ba.AuthID
-  group by LastN;
+  group by a.AuthID;
 
 drop view if exists AvgSpentPerBook;
 create view AvgSpentPerBook as
@@ -155,6 +155,4 @@ create view AvgSpentPerBook as
   where c.CustomerID = o.CustomerID and
         o.OrderID = bo.OrderID and
         bo.ISBN = b.ISBN
-  group by LastN;
-
-
+  group by c.CustomerID;
